@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use App\Models\Products;
 
@@ -13,7 +14,7 @@ class ProductsController extends Controller
         $result = Products::all();
         return response()->json($result);
     }
-    
+
     // Sadece ürün başlıklarını döndürür
     public function ProductCategory()
     {
@@ -25,13 +26,13 @@ class ProductsController extends Controller
         $Category = Products::pluck('productTitle'); // Ürün başlıklarını alır
         return response()->json($Category);
     }
-    
+
     public function getProductsByTitle(Request $request)
     {
         // 'title' query parametresini al
         $title = $request->query('title');
 
-        if ($title !=="All products") {
+        if ($title !== "All products") {
             // 'productTitle' alanında arama yap
             $products = Products::where('productTitle', 'LIKE', "%$title%")->get();
             return response()->json($products);
@@ -40,6 +41,18 @@ class ProductsController extends Controller
             $products = Products::all();
             return response()->json($products);
         }
+    }
+
+    public function createProduct(ProductRequest $request)
+    {
+
+        // Products::query()->create();
+
+        $attributes = $request->validated();
+
+        Products::query()->create($attributes);
+
+        return response()->json([200, "The product added successfully"]);
     }
 
 
@@ -61,5 +74,5 @@ class ProductsController extends Controller
     // return response()->json($kidsProducts);
     // }
 
-    
+
 }

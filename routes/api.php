@@ -12,7 +12,8 @@ Route::get('/test', function () {
 });
 // routes/api.php
 
-Route::get('/allProducts', [ProductsController::class, 'AllProductsView']);
+Route::get('/products', [ProductsController::class, 'AllProductsView']);
+Route::post('/newProduct', [ProductsController::class, 'createProduct']);
 // Route::get('/menProducts', [ProductsController::class, 'MenProductsView']);
 // Route::get('/womenProducts', [ProductsController::class, 'WomenProductsView']);
 // Route::get('/kidsProducts', [ProductsController::class, 'KidsProductsView']);
@@ -21,4 +22,3 @@ Route::get('/allProducts', [ProductsController::class, 'AllProductsView']);
 Route::get('/productsCategory', [ProductsController::class, 'ProductCategory']);
 Route::get('/productsTitle', [ProductsController::class, 'ProductsTitle']);
 Route::get('/filteredProducts', [ProductsController::class, 'getProductsByTitle']);
-

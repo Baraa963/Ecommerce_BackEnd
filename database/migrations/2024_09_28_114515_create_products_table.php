@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('productImg')->nullable();
             $table->string('productTitle');
             $table->decimal('productPrice', 8, 2);
-            $table->text('productDiscription');
+            $table->text('productDescription');
             $table->decimal('productRating');
-            $table->string('productCategory');
+            $table->string('productCategory')->default('electronics');
             $table->timestamps();
         });
     }
