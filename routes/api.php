@@ -22,3 +22,8 @@ Route::get('/productsCategory', [ProductsController::class, 'ProductCategory']);
 Route::get('/productsTitle', [ProductsController::class, 'ProductsTitle']);
 Route::get('/filteredProducts', [ProductsController::class, 'getProductsByTitle']);
 
+
+// post routers
+Route::post('/newProduct', [ProductsController::class, 'setNewProduct']);
+
+
