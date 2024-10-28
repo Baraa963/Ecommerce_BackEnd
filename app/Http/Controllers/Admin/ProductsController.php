@@ -45,28 +45,28 @@ class ProductsController extends Controller
     
     
     public function setNewProduct(Request $request)
-    {
-        $request->validate([
+{
+    try {
+        $validatedData = $request->validate([
             'productTitle' => 'required|string|max:255',
-            'productPrice' => 'required|numeric',
-            'productDescription' => 'required|string',
-            'productRating' => 'required|numeric|min:0|max:5',
-            'productCategory' => 'required|string',
+            'productPrice' => 'required|numeric|min:0',
+            'productDiscription' => 'required|string',
+            'productRating' => 'required|numeric|between:0,5',
+            'productCategory' => 'required|string|max:255',
             'productImg' => 'nullable|url',
         ]);
-    
-        
-        Products::create([
-            'productTitle' => $request->input('productTitle'),
-            'productPrice' => $request->input('productPrice'),
-            'productDescription' => $request->input('productDescription'),
-            'productRating' => $request->input('productRating'),
-            'productCategory' => $request->input('productCategory'),
-            'productImg' => $request->input('productImg'),
-        ]);
-    
-        return response()->json(['message' => 'Product added successfully'], 201);
+
+        $product = Products::create($validatedData);
+
+        return response()->json([
+            'message' => 'Product added successfully',
+            'product' => $product,
+        ], 201);
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'An error occurred: ' . $e->getMessage()
+        ], 500);
     }
-    
+}
  
 }

@@ -16,11 +16,12 @@ return new class extends Migration
             $table->string('productImg')->nullable();
             $table->string('productTitle');
             $table->decimal('productPrice', 8, 2);
-            $table->text('productDescription');
+            $table->text('productDiscription');  // 'productDiscription' yerine 'productDescription' burada doğru mu?
             $table->decimal('productRating');
             $table->string('productCategory');
             $table->timestamps();
         });
+        
     }
 
     /**
